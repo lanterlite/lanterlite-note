@@ -1,0 +1,28 @@
+This is the User API
+Call this api passing body and get the object
+---
+tags:
+  - User
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      properties:
+        user_email:
+          type: string
+        user_username:
+          type: string
+        user_password:
+          type: string
+        user_first_name:
+          type: string
+        user_last_name:
+          type: string
+responses:
+  500:
+    description: Error can't add user!
+  200:
+    description: Success add user!
+    schema:
+      id: userSchema

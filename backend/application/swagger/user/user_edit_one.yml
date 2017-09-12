@@ -1,0 +1,33 @@
+This is the User API
+Call this api passing id and put the body to update
+---
+tags:
+  - User
+parameters:
+  - name: user_id
+    in: path
+    type: integer
+    required: true
+    description: User ID
+  - name: body
+    in: body
+    required: true
+    schema:
+      properties:
+        user_email:
+          type: string
+        user_username:
+          type: string
+        user_password:
+          type: string
+        user_first_name:
+          type: string
+        user_last_name:
+          type: string
+responses:
+  500:
+    description: Error can't put user!
+  200:
+    description: Success put user!
+    schema:
+      id: userSchema

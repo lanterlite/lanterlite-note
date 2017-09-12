@@ -1,0 +1,18 @@
+This is the User API
+Call this api passing id and get the object with it's id
+---
+tags:
+  - User
+parameters:
+  - name: user_id
+    in: path
+    type: integer
+    required: true
+    description: User ID
+responses:
+  500:
+    description: Error can't get selected user!
+  200:
+    description: Success get selected user!
+    schema:
+      id: userSchema

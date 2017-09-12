@@ -1,0 +1,46 @@
+This is the User API
+Get All the objects
+---
+tags:
+  - User
+responses:
+  500:
+    description: Error can't get all the user!
+  200:
+    description: Success get all the user!
+    schema:
+      id: userSchema
+      properties:
+        user_id:
+          type: integer
+          default: 1
+        user_email:
+          type: string
+          default: abdullah@lanterlite.com
+        user_username:
+          type: string
+          default: abdullahbinifan
+        user_password:
+          type: string
+          default: xxxxxxx
+        user_profile_pict:
+          type: string
+          default: no picture
+        user_first_name:
+          type: string
+          default: Abdullah
+        user_last_name:
+          type: string
+          default: bin Ifan
+        user_friends:
+          type: integer
+          default: 0
+        user_is_activated:
+          type: integer
+          default: 0
+        user_created_at: 
+          type: datetime
+          default: 2017-07-24 09:27:02.879
+        user_updated_at: 
+          type: datetime
+          default: 2017-07-24 09:27:02.879

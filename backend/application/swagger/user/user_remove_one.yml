@@ -1,0 +1,18 @@
+This is the User API
+Call this api passing id and delete the object
+---
+tags:
+  - User
+parameters:
+  - name: user_id
+    in: path
+    type: integer
+    required: true
+    description: User ID
+responses:
+  500:
+    description: Error can't delete user!
+  200:
+    description: Success delete user!
+    schema:
+      id: userSchema
