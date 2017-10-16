@@ -1,0 +1,25 @@
+/* @import "assets/stylesheets/base.scss"; */
+/* @import "assets/stylesheets/datagrid.scss"; */
+/* @import "assets/stylesheets/chart.scss"; */
+@import "assets/stylesheets/login_form.scss";
+/* @import "assets/stylesheets/breadcrumb.scss"; */
+/* @import "assets/stylesheets/login.scss"; */
+
+html, body {
+    height: 100% !important;
+    min-height: 100% !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato, sans-serif';
+    background-color: #f6f6f6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+

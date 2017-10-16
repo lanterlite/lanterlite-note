@@ -1,0 +1,21 @@
+.formcontainer {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    >   .formfield {
+        margin: 20px;
+
+        &   .datefield {
+            cursor:pointer;
+        }
+    }
+
+    >   .formsection {
+        display: flex;
+        flex-flow: column;
+        padding: 20px;
+    }
+
+}
