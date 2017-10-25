@@ -1,0 +1,27 @@
+/**
+ *     @copyright Sense Health bv Indonesia
+ *     @file base.scss
+ *     @author Eva Danti Rahmanita
+ *     @desc Pre-compiled css file for styling every base container
+*/
+
+.base{
+	display:flex;
+	flex-direction: column;
+	position:relative;
+	margin-left: 250px;
+	top: 70px;
+	padding: 15px;
+	font-family: Lato, sans-serif;
+    min-height: 100%;
+	height: 100%;
+
+	&	.master {
+			height: auto;
+			width: auto;
+			text-align: left;
+			flex-flow: wrap;
+			padding: 10;
+			position: relative;
+	}
+}

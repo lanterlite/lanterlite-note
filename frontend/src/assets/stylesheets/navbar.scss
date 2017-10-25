@@ -1,0 +1,67 @@
+#navbar-ul {
+    margin: 0;
+    padding: 0;
+}
+
+#navwrapper {
+  width: 100%;
+  height: auto;
+  background-color: #CBAF7C; 
+}
+
+#navbar {
+  margin: 0 auto;
+  width:980px;
+  height:auto;
+}
+
+
+#body-navbar-ul {
+    margin: 0;
+    padding: 0;
+}
+
+#body-navwrapper {
+    width: 100%;
+    height: auto;
+}
+
+#body-navbar {
+    margin: 0 auto; // same as margin-top:0; margin-bottom:0; margin-left:auto; margin-right:auto;
+    width:980px;
+    height:auto;
+}
+
+
+#general-navbar-ul {
+    margin: 0;
+    padding: 0;
+}
+
+#general-navwrapper {
+  width: 100%;
+  height: auto;
+  background-color: #CBAF7C; 
+}
+
+#general-navbar {
+  margin: 0 auto;
+  width:980px;
+  height:auto;
+}
+
+.general-navbar-icons {
+    padding: 10px 0px 10px 600px;
+    width: 500px;
+}
+
+.general-navbar-icons > .svg-icon {
+    padding: 0px 15px;
+    fill: #FFFCC9;
+}
+
+.general-title {
+    position: absolute;
+    color: #FFFCC9;
+    margin-left: 10px;
+}

@@ -1,7 +1,10 @@
-/* @import "assets/stylesheets/base.scss"; */
+@import "assets/stylesheets/base.scss";
 /* @import "assets/stylesheets/datagrid.scss"; */
-/* @import "assets/stylesheets/chart.scss"; */
+@import "assets/stylesheets/form.scss";
 @import "assets/stylesheets/login_form.scss";
+@import "assets/stylesheets/app_bar.scss";
+@import "assets/stylesheets/navbar.scss";
+@import "assets/stylesheets/profile_page.scss";
 /* @import "assets/stylesheets/breadcrumb.scss"; */
 /* @import "assets/stylesheets/login.scss"; */
 

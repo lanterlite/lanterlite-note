@@ -1,54 +1,41 @@
-from flask import jsonify
-from flask import request
 from application import db
-import datetime
-from flask import Response
 from application.response import *
-import json
+
+from flask import Response
+
+import datetime
 
 # =======================================================
 # USER MODEL
 # =======================================================	
 		
 class User(db.Model):
-	user_id			  = db.Column(db.Integer, primary_key=True)
-	user_email		   = db.Column(db.VARCHAR(255), unique=True)
-	user_username		= db.Column(db.VARCHAR(255), unique=True)
-	user_password		= db.Column(db.VARCHAR(255), unique=False)
-	user_profile_pict	= db.Column(db.VARCHAR(255), unique=False)
-	user_first_name	  = db.Column(db.VARCHAR(255), unique=False)
-	user_last_name	   = db.Column(db.VARCHAR(255), unique=False)
-	user_friends		 = db.Column(db.Integer, unique=False)	
-	user_is_activated	= db.Column(db.Integer, unique=False)
-	user_created_at	  = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-	user_updated_at	  = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+	id				= db.Column(db.Integer, primary_key=True)
+	name			= db.Column(db.VARCHAR(255), unique=False)
+	email			= db.Column(db.VARCHAR(255), unique=True)
+	password		= db.Column(db.VARCHAR(255), unique=False)
+	username		= db.Column(db.VARCHAR(255), unique=True)
+	image			= db.Column(db.VARCHAR, unique=False)
+	friendlist		= db.Column(db.ARRAY(db.Integer, as_tuple=False, dimensions=None, zero_indexes=False))
+	is_activated	= db.Column(db.Boolean, unique=False, default=True)
+	created_at	  	= db.Column(db.DateTime, default=datetime.datetime.utcnow)
+	updated_at	  	= db.Column(db.DateTime, default=datetime.datetime.utcnow)
+	violation_id 	= db.Column(db.Integer, db.ForeignKey('violation.id'), nullable=True, unique=False)
 
-	def __init__(
-		self,
-		user_email, 
-		user_username, 
-		user_password, 
-		user_profile_pict, 
-		user_first_name, 
-		user_last_name, 
-		user_friends, 
-		user_is_activated, 
-		user_created_at,
-		user_updated_at 
-	):
-		self.user_email		 = user_email
-		self.user_username	  = user_username
-		self.user_password	  = user_password
-		self.user_profile_pict  = user_profile_pict
-		self.user_first_name	= user_first_name
-		self.user_last_name	 = user_last_name	
-		self.user_friends	   = user_friends
-		self.user_is_activated   = user_is_activated
-		self.user_created_at	= user_created_at
-		self.user_updated_at	= user_updated_at
+	def __init__( self, name, email, password, username, image, friendlist, is_activated, created_at, updated_at, violation_id ):
+		self.name			= name
+		self.email			= email
+		self.password		= password
+		self.username		= username
+		self.image  		= image
+		self.friendlist	   	= friendlist
+		self.is_activated   = is_activated
+		self.created_at		= created_at.isoformat()
+		self.updated_at		= updated_at.isoformat()
+		self.violation_id	= violation_id
 
 	def __repr__(self):
-		return '<User %r>' % self.user_username
+		return '<User %r>' % self.username
 
 	# =======================================================
 	# GET ALL USER
@@ -59,19 +46,19 @@ class User(db.Model):
 		result = []
 		
 		for user in all_users:
-			user_data = {}
-			user_data['user_id'] = user.user_id
-			user_data['user_email'] = user.user_email
-			user_data['user_username'] = user.user_username
-			user_data['user_password'] = user.user_password
-			user_data['user_profile_pict'] = user.user_profile_pict
-			user_data['user_first_name'] = user.user_first_name
-			user_data['user_last_name'] = user.user_last_name
-			user_data['user_friends'] = user.user_friends
-			user_data['user_is_activated'] = user.user_is_activated
-			user_data['user_created_at'] = user.user_created_at
-			user_data['user_updated_at'] = user.user_updated_at
-			result.append(user_data)
+			data = {}
+			data['id'] = user.id
+			data['name'] = user.name
+			data['email'] = user.email
+			data['password'] = user.password
+			data['username'] = user.username
+			data['image'] = user.image
+			data['friendlist'] = user.friendlist
+			data['is_activated'] = user.is_activated
+			data['created_at'] = user.created_at.isoformat()
+			data['updated_at'] = user.updated_at.isoformat()
+			data['violation_id'] = user.violation_id
+			result.append(data)
 			
 		resp_result = result
 		resp_status = OK
@@ -83,32 +70,30 @@ class User(db.Model):
 	# GET ONE USER
 	# =======================================================
 	@staticmethod
-	def getOneUser(id):		
+	def getOne(id):		
 		all_users = User.query.all()
 		output = []
 		
 		for user in all_users:
-			user_data = {}
-			user_data['user_id'] = user.user_id
-			user_data['user_email'] = user.user_email
-			user_data['user_username'] = user.user_username
-			user_data['user_password'] = user.user_password
-			user_data['user_profile_pict'] = user.user_profile_pict
-			user_data['user_first_name'] = user.user_first_name
-			user_data['user_last_name'] = user.user_last_name
-			user_data['user_friends'] = user.user_friends
-			user_data['user_is_activated'] = user.user_is_activated
-			user_data['user_created_at'] = user.user_created_at
-			user_data['user_updated_at'] = user.user_updated_at
-			output.append(user_data)
-			
+			data = {}
+			data['id'] = user.id
+			data['name'] = user.name
+			data['email'] = user.email
+			data['password'] = user.password
+			data['username'] = user.username
+			data['image'] = user.image
+			data['friendlist'] = user.friendlist
+			data['is_activated'] = user.is_activated
+			data['created_at'] = user.created_at.isoformat()
+			data['updated_at'] = user.updated_at.isoformat()
+			data['violation_id'] = user.violation_id
+			output.append(data)			
 			
 		try:	
-			user = [oneUser for oneUser in output if oneUser['user_id'] == id]
+			user = [oneUser for oneUser in output if oneUser['id'] == id]
 			resp_result = user[0]
 			resp_status = OK
 			resp_mimetype = JSON_TYPE
-			print 'in'
 			return Response(response=resp_result, status=resp_status, mimetype=resp_mimetype)
 		except:
 			return Response(status=NOT_FOUND)
@@ -119,35 +104,23 @@ class User(db.Model):
 	@staticmethod
 	def addOneUser(input):
 		new_user = User(
-			input['user_email'],
-			input['user_username'],
-			input['user_password'],
-			"no picture",
-			input['user_first_name'],
-			input['user_last_name'],
-			0,
-			0,
+			input['name'],
+			input['email'],
+			input['password'],
+			input['username'],
+			input['image'],
+			input['friendlist'],
+			input['is_activated'],
 			datetime.datetime.now(),
 			datetime.datetime.now(),
+			input['violation_id'],
 		)
 		
 		try:			
 			db.session.add(new_user)
 			db.session.commit()
-			user = User.query.filter_by(user_email=input['user_email']).first()
+			user = User.query.filter_by(email=input['email']).first()
 
-			out = False
-			while out == False:
-				try:
-					user = User.query.filter_by(user_email=input['user_email']).first()
-					if user.user_id:
-						out = True
-				except:
-					out = False
-
-			location = '/user/' + str(user.user_id)
-			resp_headers = { 'location' : location }
-			
 			return Response(status=CREATED, headers=resp_headers)
 		except:
 			return Response(status=CONFLICT)
@@ -156,10 +129,9 @@ class User(db.Model):
 	# REMOVE ONE USER
 	# =======================================================
 	@staticmethod
-	def removeOneUser(user_id):
-
+	def removeOneUser(id):
 		try:
-			db.session.query(User).filter_by(user_id=user_id).delete()
+			db.session.query(User).filter_by(id=id).delete()
 			db.session.commit()
 			return Response(status=OK)
 		except:
@@ -171,16 +143,16 @@ class User(db.Model):
 	@staticmethod
 	def editOneUser(id, user):
 		try:
-			selected_user = User.query.filter_by(user_id=id).first()
-			selected_user.user_email = user['user_email']
-			selected_user.user_username = user['user_username']
-			selected_user.user_password = user['user_password']
-			selected_user.user_profile_pict = user['user_profile_pict']
-			selected_user.user_first_name = user['user_first_name']
-			selected_user.user_last_name = user['user_last_name']
-			selected_user.user_is_activated = user['user_is_activated']
-			selected_user.user_created_at = selected_user.user_created_at
-			selected_user.user_updated_at = datetime.datetime.now()
+			selected_user = User.query.filter_by(id=id).first()
+			selected_user.name = user['name']
+			selected_user.email = user['email']
+			selected_user.password = user['password']
+			selected_user.username = user['username']
+			selected_user.image = user['image']
+			selected_user.is_activated = user['is_activated']
+			selected_user.created_at = selected_user.created_at
+			selected_user.updated_at = datetime.datetime.now()
+			selected_user.violation_id = user['violation_id']
 			
 			db.session.merge(selected_user)
 			db.session.commit()

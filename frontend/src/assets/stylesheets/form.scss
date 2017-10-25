@@ -17,5 +17,31 @@
         flex-flow: column;
         padding: 20px;
     }
-
 }
+
+
+.dg-base {
+  height: 80%;
+  width: 100%;
+  padding: 20px; }
+  .dg-base > .dg-container {
+    width: 100%; }
+  .dg-base > .dg-upperbutton {
+    margin-bottom: 10px;
+    float: right; }
+  .dg-base > .dg-bottombutton {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .dg-base > .mastertable {
+    height: auto;
+    width: 98.775%;
+    float: left;
+    margin: 12px; }
+  .dg-base > .dg-title {
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 24px;
+    color: #01c00f;
+    text-transform: capitalize; }

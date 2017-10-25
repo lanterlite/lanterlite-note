@@ -6,39 +6,31 @@ from flask import Response
 import datetime
 
 # =======================================================
-# PAPER MODEL
+# NOTEBOOK MODEL
 # =======================================================	
 		
-class Admin(db.Model):
+class Notebook(db.Model):
 	id			= db.Column(db.Integer, primary_key=True)
-	name		= db.Column(db.VARCHAR(255), unique=False)
-	email		= db.Column(db.VARCHAR(255), unique=True)
-	password	= db.Column(db.VARCHAR(255), unique=False)
-	is_enabled	= db.Column(db.Boolean, unique=False, default=True)
+	title		= db.Column(db.VARCHAR, unique=False)
 	created_at	= db.Column(db.DateTime, default=datetime.datetime.utcnow)
 	updated_at	= db.Column(db.DateTime, default=datetime.datetime.utcnow)
-	created_by	= db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False, unique=False)
-	updated_by	= db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False, unique=False)
+	user_id		= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=False)
 
-	def __init__( self, name, email, password, is_enabled, created_at, updated_at, created_by, updated_by ):
-		self.name		= name
-		self.email		= email
-		self.password	= password
-		self.is_enabled	= is_enabled
+	def __init__( self, title, created_at, updated_at, user_id ):
+		self.title		= title
 		self.created_at	= created_at
 		self.updated_at	= updated_at
-		self.created_by	= created_by
-		self.updated_by	= updated_by
+		self.user_id	= user_id
 
 	def __repr__(self):
-		return '<Admin %r>' % self.title
+		return '<Notebook %r>' % self.title
 
 	# =======================================================
 	# GET ALL DATA
 	# =======================================================	
 	@staticmethod
 	def getAll():
-		all_data = Admin.query.all()
+		all_data = Notebook.query.all()
 		result = []
 		
 		for _data in all_data:
@@ -61,7 +53,7 @@ class Admin(db.Model):
 	# =======================================================
 	@staticmethod
 	def getOne(id):		
-		all_data = Admin.query.all()
+		all_data = Notebook.query.all()
 		output = []
 		
 		for _data in all_data:
@@ -87,7 +79,7 @@ class Admin(db.Model):
 	# =======================================================
 	@staticmethod
 	def addOne(input):
-		new_data = Admin(
+		new_data = Notebook(
 			input['title'],
 			datetime.datetime.now(),
 			datetime.datetime.now(),
@@ -97,7 +89,7 @@ class Admin(db.Model):
 		try:			
 			db.session.add(new_data)
 			db.session.commit()
-			data = Admin.query.filter_by(id=input['user_id']).first()
+			data = Notebook.query.filter_by(id=input['user_id']).first()
 
 			return Response(status=CREATED, headers=resp_headers)
 		except:
@@ -109,7 +101,7 @@ class Admin(db.Model):
 	@staticmethod
 	def removeOne(id):
 		try:
-			db.session.query(Admin).filter_by(id=id).delete()
+			db.session.query(Notebook).filter_by(id=id).delete()
 			db.session.commit()
 			return Response(status=OK)
 		except:
@@ -121,7 +113,7 @@ class Admin(db.Model):
 	@staticmethod
 	def editOne(id, input):
 		try:
-			selected_user = Admin.query.filter_by(id=id).first()
+			selected_user = Notebook.query.filter_by(id=id).first()
 			selected_user.title = input['title']
 			selected_user.created_at = selected_user.created_at
 			selected_user.updated_at = datetime.datetime.now()

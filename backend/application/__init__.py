@@ -1,5 +1,4 @@
 from flask import Flask
-from settings import ALLOWED_EXTENSIONS
 from settings import DEBUG
 # from settings import *
 from settings import SQLALCHEMY_DATABASE_URI
@@ -15,11 +14,6 @@ app.config.from_pyfile('settings.py')
 # app.static_folder = 'static'
 # from flask import request
 # import os
-
-# =============================================
-# FLASK UPLOAD
-# =============================================
-app.config['ALLOWED_EXTENSIONS']
 
 # =============================================
 # FLASK SQLALCHEMY
