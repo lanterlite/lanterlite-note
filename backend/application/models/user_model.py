@@ -8,7 +8,7 @@ import datetime
 # =======================================================
 # USER MODEL
 # =======================================================	
-		
+
 class User(db.Model):
 	id				= db.Column(db.Integer, primary_key=True)
 	name			= db.Column(db.VARCHAR(255), unique=False)
