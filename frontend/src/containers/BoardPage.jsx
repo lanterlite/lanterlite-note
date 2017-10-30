@@ -24,6 +24,10 @@ import BaseContainer from './BaseContainer'
 
 export default class BoardPage extends React.Component{
 
+	componentWillMount = () => {
+		document.body.style.backgroundColor = "#FFFCC9";
+	}
+
     render(){
 		return(
 			<div>

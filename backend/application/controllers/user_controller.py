@@ -31,24 +31,34 @@ def getOne(id):
 	else:
 		return output
 
-# @app.route(BACKEND_VERSION + USER_ROUTE, methods=['POST'])
-# def addOne_user():	
-# 	if request.headers['User-Type'] == UserType.SUPERADMIN.name:
-# 		output = User.addOneUser(request.json)
-# 		if str(CREATED) in str(output.status):
-# 			user = User.getOneUser(int(request.json['created_by']))
-# 			print str(user.status)
-# 			if str(OK) in str(user.status):
-# 				action = {}
-# 				action['action'] = 'User: ' + user.response['first_name'] + ' has added user: ' + request.json['first_name']
-# 				log = ActivityLog.addOneLog(action)
-# 				return output
-# 			else:
-# 				return user
-# 		else:
-# 			return output
-# 	else:
-# 		return Response(status=METHOD_NOT_ALLOWED)
+@app.route(BACKEND_VERSION + USER_ROUTE, methods=['POST'])
+def addOne():	
+	output = User.addOne(request.json)
+	return output
+
+@app.route(BACKEND_VERSION + USER_ROUTE, methods=['PUT'])
+def upsertSome():
+	output = User.upsertSome(request.json)
+	return output
+	
+@app.route(BACKEND_VERSION + USER_ROUTE + '/upload/', methods=['POST'])
+def uploadImage():
+	output = User.uploadImage(request)
+	if str(OK) in str(output.status):
+		all_users = User.getAll()
+		uploader = filter(lambda user: str(user['id']).find(str(request.headers['id'])) != -1 , all_users.response)
+		uploader[0]['image'] = output.response['filename']
+		output = User.upsertSome(uploader)
+	return output
+
+@app.route(BACKEND_VERSION + USER_ROUTE + '/image/', methods=['put'])
+def getImage():
+	print 'b'
+	output = User.getImage(request)
+	return output
+
+	# f = open('/Users/Desktop/febROSTER2012.xls')
+ 	# return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
 # @app.route(BACKEND_VERSION + USER_ROUTE + '/<int:id>', methods=['PUT'])
 # def editOne_user(id):
@@ -100,27 +110,4 @@ def getOne(id):
 # 		return json.dumps(filteredRes[0]), resp_status
 # 	else:
 # 		return Response(status=NOT_ACCEPTABLE)
-
-# @app.route(BACKEND_VERSION + USER_ROUTE, methods=['PUT'])
-# @swag_from('../swagger/user/user_merge_one.yml')
-# def mergeOne_user():
-# 	print 'a'
-# 	total_data = list(request.json)
-# 	print 'b'
-# 	user = User.getOneUser(request.json[0]['updated_by'])
-# 	print 'c'
-# 	print request.json[0]['updated_by']
-# 	if str(OK) in str(user.status):
-# 		print 'd'
-# 		output = User.mergeOneUser(request.json)
-# 		if str(OK) in str(output.status):
-# 			print 'e'
-# 			for i in range(0, len(total_data)):
-# 				action = {}
-# 				action['action'] = 'User: ' + user.response['first_name'] + ' has added/ updated user: ' + total_data[i]['first_name'] + ' ' + total_data[i]['last_name']
-# 				log = ActivityLog.addOneLog(action)
-# 				print action['action']
-# 		return output
-# 	else:
-# 		return user
 

@@ -1,7 +1,5 @@
 # all compiled python file
 *.pyc
-/*.pyc
-find . -name "*.pyc" -exec git rm -f "{}" \;
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 

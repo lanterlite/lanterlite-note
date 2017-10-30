@@ -15,6 +15,11 @@ PORT = os.getenv('PORT', 5000)
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@localhost/lanternoteDB'
 
 # =====================================================
+# FLASK UPLOAD FILE SETTINGS 
+# =====================================================
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+# =====================================================
 # URL SETTINGS 
 # =====================================================
 SITE_URL = 'localhost:5000' #http://localhost:5000

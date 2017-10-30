@@ -78,6 +78,13 @@ export default class LoginPage extends React.Component{
 						<input type="text" name="lastname" placeholder="Email" />
 						<input type="text" name="lastname" placeholder="Password" />
 						<input type="text" name="lastname" placeholder="Confirm Password" />
+						{/*
+						<RaisedButton 
+							onClick={this.handleLoginBtnClick}
+							type="button" 
+							value="Sign Up"
+						/>
+					*/}
 						<input onClick={this.handleLoginBtnClick} type="button" value="Sign Up" />	{/* alternative: <button /> */}
 					</form>
 				  </div>

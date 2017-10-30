@@ -4,6 +4,9 @@ import React from 'react'
 import LoginPage from './containers/LoginPage'
 import BoardPage from './containers/BoardPage'
 import ProfilePage from './containers/ProfilePage'
+import NotebookPage from './containers/NotebookPage'
+import NotificationPage from './containers/NotificationPage'
+import ExperimentPage from './containers/ExperimentPage'
 
 export default class Main extends React.Component {
 	constructor(){
@@ -41,9 +44,10 @@ export default class Main extends React.Component {
 					login_page		: '/',
 					signup_page		: '/signup',
 					board_page		: '/board',
-					profile_page	: '/account/:id',
+					profile_page	: '/account',
 					friendlist_page	: '/friendlist',
-					note_page		: '/note',
+					notebook_page	: '/notebook',
+					experiment_page	: '/experiment'
 				},
 				backendRoute: {
 					version		: '/v1',
@@ -93,6 +97,35 @@ export default class Main extends React.Component {
                         />
 					</Route>
 				}
+				{
+					<Route exact path={this.state.url.frontendRoute.notebook_page}>
+						<NotebookPage 
+                            color	= {this.state.color}
+                            user	= {this.state.users}
+                            url		= {this.state.url}
+                        />
+					</Route>
+				}
+				{
+					<Route exact path={this.state.url.frontendRoute.notification_page}>
+						<NotificationPage 
+                            color	= {this.state.color}
+                            user	= {this.state.users}
+                            url		= {this.state.url}
+                        />
+					</Route>
+				}
+				{/*
+				{
+					<Route exact path={this.state.url.frontendRoute.experiment_page}>
+						<ExperimentPage 
+                            color	= {this.state.color}
+                            user	= {this.state.users}
+                            url		= {this.state.url}
+                        />
+					</Route>
+				}
+					*/}
 				{
                     <Route exact path="*">
                         <div>

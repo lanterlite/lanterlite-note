@@ -12,9 +12,23 @@ import dashboard from '../../assets/stylesheets/icons/dashboard_24px.svg';
 import book from '../../assets/stylesheets/icons/book_24px.svg';
 import account_circle from '../../assets/stylesheets/icons/account_circle_24px.svg';
 
+import { Redirect } 		from 'react-router'
+
 export default class Header extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            isRedirect: false,
+            toPage: null,
+        };
+    }
 
 	render(){
+		if (this.state.isRedirect === true){
+			this.setState({ isRedirect: false })
+			return <Redirect from='/board' to={this.state.toPage} />
+		}
+
 		const style = {
 			appBar: {
 				position: 'fixed',
@@ -35,10 +49,46 @@ export default class Header extends React.Component{
 		  						<label style={{fontFamily: 'lb_constantia', fontSize: 35}}>Liteboard</label>
 		  					</div>
 							<div className="general-navbar-icons">
-								<a className="svg-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></a>
-								<a className="svg-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg></a>
-								<a className="svg-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></a>
-								<a className="svg-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></a>
+								<div className="svg-path">
+									<a className="svg-icon" onClick={() => {this.setState({ isRedirect: true, toPage: '/board' })}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" enable-background="new 0 0 47.6 59.8">
+									<filter id="blur-filter" x="-2" y="-2" width="200" height="200">
+								    	<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+								    </filter>
+									<path id="glow" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+									<path id="color" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+									</svg></a>
+
+									<a className="svg-icon" onClick={() => {this.setState({ isRedirect: true, toPage: '/notebook' })}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<filter id="blur-filter" x="-2" y="-2" width="200" height="200">
+								    	<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+								    </filter>
+									<path id="glow" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+									<path id="color" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+									</svg></a>
+
+									<a className="svg-icon" onClick={() => {this.setState({ isRedirect: true, toPage: '/notification' })}}> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<filter id="blur-filter" x="-2" y="-2" width="200" height="200">
+								    	<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+								    </filter>
+									<path id="glow" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+									<path id="color" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+									</svg></a>
+
+									<div className="dropdown">
+									<a className="dropbtn" > <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<filter id="blur-filter" x="-2" y="-2" width="200" height="200">
+								    	<feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+								    </filter>
+									<path id="glow" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+									<path id="color" fill="none" stroke-width="2" stroke-miterlimit="10" stroke="#FFFCC9" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+									</svg>
+									</a>
+									<div className="dropdown-content">
+										<a onClick={() => {this.setState({ isRedirect: true, toPage: '/account' })}}>User Account</a>
+										<a onClick={() => {this.setState({ isRedirect: true, toPage: '/' })}}>Logout</a>
+									</div>
+									</div>
+								</div>
 							</div>
 						</ul>				 
 				  	</div>

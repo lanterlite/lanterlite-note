@@ -4,8 +4,8 @@ from settings import DEBUG
 from settings import SQLALCHEMY_DATABASE_URI
 # from application.settings import *
 
-app = Flask(__name__)
-# app = Flask(__name__, static_url_path='')
+# app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 app.debug = DEBUG
 # app.config.from_object('settings')
